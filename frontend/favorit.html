@@ -8,7 +8,7 @@
             const userId = localStorage.getItem("userId");
 
             try {
-                const res = await fetch(`http://localhost:5000/favorites/${userId}`, {
+                const res = await fetch(`https://kendaraan-be-75-101-981623652580.us-central1.run.app/favorites/${userId}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const favorites = await res.json();
