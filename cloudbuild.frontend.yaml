@@ -1,0 +1,11 @@
+steps:
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      [
+        'app',
+        'deploy',
+        'frontend/app.yaml',
+        '--project',
+        'B-12',
+        '--quiet'
+      ]
