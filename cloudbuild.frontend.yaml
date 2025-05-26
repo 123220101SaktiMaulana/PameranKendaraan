@@ -4,7 +4,7 @@ steps:
       [
         'app',
         'deploy',
-        'frontend/app.yaml',
+        'app.yaml',
         '--project',
         'B-12',
         '--quiet'
