@@ -1,20 +1,12 @@
 steps:
   # 1. Build Docker image untuk backend
   - name: "gcr.io/cloud-builders/docker"
-    args: [
-      "build",
-      "-t",
-      "asia-east1-docker.pkg.dev/B-12/backend-repo/kendaraan-be-75-101:$SHORT_SHA",
-      "."
-    ]
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/kendaraan-be-75-101", "."]
     dir: "backend"
 
-  # 2. Push ke Artifact Registry
+  # 2. Push ke Container Registry / Artifact Registry
   - name: "gcr.io/cloud-builders/docker"
-    args: [
-      "push",
-      "asia-east1-docker.pkg.dev/B-12/backend-repo/kendaraan-be-75-101:$SHORT_SHA"
-    ]
+    args: ["push", "gcr.io/$PROJECT_ID/kendaraan-be-75-101"]
 
   # 3. Deploy ke Cloud Run
   - name: "gcr.io/cloud-builders/gcloud"
@@ -25,17 +17,17 @@ steps:
         "deploy",
         "kendaraan-be-75-101",
         "--image",
-        "asia-east1-docker.pkg.dev/B-12/backend-repo/kendaraan-be-75-101:$SHORT_SHA",
+        "gcr.io/$PROJECT_ID/kendaraan-be-75-101",
         "--timeout",
         "1000s",
         "--port",
         "5000",
         "--region",
-        "asia-east1",
-        "--platform",
-        "managed",
+        "us-central1",
         "--allow-unauthenticated",
       ]
 
+# Log hanya akan disimpan di Google Cloud Logging
+# Log tidak akan disimpan di Google Cloud Storage (butuh hak akses).
 options:
   logging: CLOUD_LOGGING_ONLY
