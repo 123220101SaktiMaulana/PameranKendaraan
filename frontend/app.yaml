@@ -1,4 +1,6 @@
-runtime: nodejs18
+runtime: python39  # Menggunakan runtime standar untuk hosting HTML statis
+service: fe-projekakhir-75-101  # Nama layanan App Engine, bisa diubah sesuai kebutuhan
+instance_class: F1  # Kelas instance untuk App Engine (F1 adalah kelas standar yang ringan)
 
 handlers:
   - url: /
@@ -8,3 +10,5 @@ handlers:
   - url: /(.*)
     static_files: \1
     upload: (.*)
+
+default_expiration: "1h"  # Waktu cache default
